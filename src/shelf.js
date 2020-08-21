@@ -4,13 +4,25 @@ function shelfBook(book, shelfArray) {
   }
 }
 
-function unshelfBook() {
+function unshelfBook(bookTitle, shelfArray) {
+  for (i = 0; i < shelfArray.length; i++) {
+    if (shelfArray[i].title === bookTitle) {
+      shelfArray.splice(i, 1);
+    }
+  }
+}
 
+function listTitles(shelfArray) {
+  var completeList = [];
+  for (i = 0; i < shelfArray.length; i++) {
+    completeList.push(shelfArray[i].title);
+  }
+  return completeList.join(', ');
 }
 
 module.exports = {
   shelfBook: shelfBook,
   unshelfBook: unshelfBook,
-  // listTitles: listTitles,
+  listTitles: listTitles,
   // searchShelf: searchShelf
 };
