@@ -20,9 +20,20 @@ function listTitles(shelfArray) {
   return completeList.join(', ');
 }
 
+function searchShelf(shelfArray, bookTitle) {
+  for (i = 0; i < shelfArray.length; i++) {
+    if (shelfArray[i].title === bookTitle) {
+       return true;
+    }
+
+
+  }
+  return false;
+}
+
 module.exports = {
   shelfBook: shelfBook,
   unshelfBook: unshelfBook,
   listTitles: listTitles,
-  // searchShelf: searchShelf
+  searchShelf: searchShelf
 };
