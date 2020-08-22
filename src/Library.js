@@ -20,27 +20,19 @@ function addBook(library, book) {
 }
 
 function checkoutBook(library, bookTitle) {
-  for (i = 0; i < library.shelves.fiction.length; i++) {
-    if (library.shelves.fiction[i].title === bookTitle) {
-      library.shelves.fiction.splice(i, 1);
-      return 'You have now checked out ' + bookTitle + ' from the ' + library.name;
-    }
-  }
-  for (i = 0; i < library.shelves.fantasy.length; i++) {
-    if (library.shelves.fantasy[i].title === bookTitle) {
-      library.shelves.fantasy.splice(i, 1);
-      return 'You have now checked out ' + bookTitle + ' from the ' + library.name;
-    }
-  }
-  for (i = 0; i < library.shelves.nonFiction.length; i++) {
-    if (library.shelves.nonFiction[i].title === bookTitle) {
-      library.shelves.nonFiction.splice(i, 1);
-      return 'You have now checked out ' + bookTitle + ' from the ' + library.name;
-    }
-  }
+  var shelfNames = Object.keys(library.shelves);
 
-  return "Sorry, there are currently no copies of " + bookTitle + " available at the Denver Public Library"
+  for (var i = 0; i < shelfNames.length; i++) {
+    for (var j = 0; j < library.shelves[shelfNames[i]].length; j++) {
+      if (library.shelves[shelfNames[i]][j].title === bookTitle) {
+        library.shelves[shelfNames[i]].splice(j, 1);
+        return 'You have now checked out ' + bookTitle + ' from the ' + library.name;
+      }
+    }
+  }
+  return "Sorry, there are currently no copies of " + bookTitle + " available at the Denver Public Library";
 }
+
 
 module.exports = {
   createLibrary: createLibrary,
