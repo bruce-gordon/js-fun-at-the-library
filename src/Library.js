@@ -20,8 +20,13 @@ function addBook(library, book) {
 }
 
 function checkoutBook(library, bookTitle) {
-  library.shelves.fiction.shift();
-  return 'You have now checked out ' + bookTitle + ' from the ' + library.name;
+  for (i = 0; i < library.shelves.fiction.length; i++) {
+    if (library.shelves.fiction[i].title === bookTitle) {
+      library.shelves.fiction.splice(i, 1);
+      return 'You have now checked out ' + bookTitle + ' from the ' + library.name;
+    }
+  }
+  return "Sorry, there are currently no copies of The Fifth Season available at the Denver Public Library"
 }
 
 module.exports = {
