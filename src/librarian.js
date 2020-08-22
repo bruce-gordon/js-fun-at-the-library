@@ -14,12 +14,18 @@ class Librarian {
     }
   }
   findBook(title) {
-    for (var i = 0; i < this.library.shelves.fantasy.length; i++)
-    {
-    if (this.library.shelves.fantasy[i].title === title) {
-      return "Yes, we have " + title
+    var shelfNames = Object.keys(this.library.shelves);
+    for (var i = 0; i < shelfNames.length; i++) {
+      for (var b = 0; b < this.library.shelves[shelfNames[i]].length; b++) {
+        if (this.library.shelves[shelfNames[i]][b].title === title) {
+          this.library.shelves[shelfNames[i]].splice(b, 1);
+          return "Yes, we have " + title;
+        }
       }
-    } return "Sorry, we do not have " + title
+    } return "Sorry, we do not have " + title;
+  }
+  calculateLateFee(daysLate) {
+    return Math.ceil(daysLate * .25);
   }
 }
 
